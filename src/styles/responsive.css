@@ -1,0 +1,259 @@
+/**
+ * 响应式布局样式
+ * 移动优先设计方法
+ * 断点: 移动端 < 768px, 平板 768-1024px, 桌面 > 1024px
+ */
+
+/* 基础响应式设置 */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 响应式容器 */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* 响应式图片 */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 触摸友好的按钮 - 最小尺寸 44x44px */
+button,
+.btn,
+.el-button,
+a.button {
+  min-height: 44px;
+  min-width: 44px;
+  padding: 12px 20px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 移动端优先样式 (< 768px) */
+@media (max-width: 767px) {
+  html {
+    font-size: 14px;
+  }
+
+  .container {
+    padding: 0 10px;
+  }
+
+  /* 导航栏 */
+  .el-menu {
+    flex-direction: column;
+  }
+
+  .el-menu-item {
+    width: 100%;
+    text-align: left;
+  }
+
+  /* 卡片布局 */
+  .el-card {
+    margin-bottom: 15px;
+  }
+
+  /* 表格 */
+  .el-table {
+    font-size: 12px;
+  }
+
+  .el-table th,
+  .el-table td {
+    padding: 8px 5px;
+  }
+
+  /* 表单 */
+  .el-form-item {
+    margin-bottom: 15px;
+  }
+
+  .el-form-item__label {
+    width: 100% !important;
+    text-align: left;
+    padding-bottom: 5px;
+  }
+
+  .el-form-item__content {
+    margin-left: 0 !important;
+  }
+
+  /* 对话框 */
+  .el-dialog {
+    width: 95% !important;
+    margin: 0 auto;
+  }
+
+  /* 商品网格 */
+  .product-grid {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 15px;
+  }
+
+  /* 隐藏移动端不需要的元素 */
+  .hide-on-mobile {
+    display: none !important;
+  }
+
+  /* 移动端显示的元素 */
+  .show-on-mobile {
+    display: block !important;
+  }
+
+  /* 移动端菜单按钮 */
+  .mobile-menu-button {
+    display: block;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    background: #409eff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 15px;
+    cursor: pointer;
+  }
+}
+
+/* 平板端样式 (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  html {
+    font-size: 15px;
+  }
+
+  .container {
+    padding: 0 20px;
+  }
+
+  /* 商品网格 */
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  /* 表格 */
+  .el-table {
+    font-size: 13px;
+  }
+
+  /* 对话框 */
+  .el-dialog {
+    width: 80% !important;
+  }
+
+  /* 隐藏平板端不需要的元素 */
+  .hide-on-tablet {
+    display: none !important;
+  }
+
+  /* 平板端显示的元素 */
+  .show-on-tablet {
+    display: block !important;
+  }
+}
+
+/* 桌面端样式 (> 1024px) */
+@media (min-width: 1025px) {
+  html {
+    font-size: 16px;
+  }
+
+  .container {
+    padding: 0 30px;
+  }
+
+  /* 商品网格 */
+  .product-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+  }
+
+  /* 隐藏桌面端不需要的元素 */
+  .hide-on-desktop {
+    display: none !important;
+  }
+
+  /* 桌面端显示的元素 */
+  .show-on-desktop {
+    display: block !important;
+  }
+
+  /* 移动端菜单按钮在桌面端隐藏 */
+  .mobile-menu-button {
+    display: none;
+  }
+}
+
+/* 通用响应式工具类 */
+.flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.full-width {
+  width: 100%;
+}
+
+/* 响应式间距 */
+.p-responsive {
+  padding: 10px;
+}
+
+@media (min-width: 768px) {
+  .p-responsive {
+    padding: 20px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .p-responsive {
+    padding: 30px;
+  }
+}
+
+/* 响应式字体大小 */
+.text-responsive {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  .text-responsive {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .text-responsive {
+    font-size: 18px;
+  }
+}

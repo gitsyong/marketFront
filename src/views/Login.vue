@@ -91,36 +91,34 @@ const handleLogin = async () => {
     loading.value = true
     
     try {
-      // TODO: 调用后端登录 API
-      // const response = await request.post('/auth/login', loginForm)
+      console.log('开始登录请求...')
+      // 调用后端登录 API
+      const response = await request.post('/auth/login', {
+        username: loginForm.username,
+        password: loginForm.password
+      })
       
-      // 模拟登录成功（后端 API 实现后替换）
-      const mockResponse = {
-        success: true,
-        data: {
-          token: 'mock-jwt-token-' + Date.now(),
-          userInfo: {
-            id: 1,
-            username: loginForm.username,
-            role: loginForm.username === 'admin' ? 'ADMINISTRATOR' : 'EMPLOYEE'
-          },
-          points: 1000
-        }
+      console.log('登录响应:', response)
+      
+      if (response.success) {
+        console.log('登录成功,保存token和用户信息')
+        // 保存用户信息
+        userStore.setToken(response.data.accessToken)
+        userStore.setUserInfo(response.data.user)
+        
+        ElMessage.success('登录成功')
+        
+        console.log('准备跳转到/home')
+        // 跳转到首页
+        router.push('/home')
+      } else {
+        console.error('登录失败:', response.message)
+        ElMessage.error(response.message || '登录失败')
       }
-      
-      // 保存用户信息
-      userStore.setToken(mockResponse.data.token)
-      userStore.setUserInfo(mockResponse.data.userInfo)
-      userStore.setPoints(mockResponse.data.points)
-      
-      ElMessage.success('登录成功')
-      
-      // 跳转到首页
-      router.push('/')
       
     } catch (error) {
       console.error('Login error:', error)
-      ElMessage.error(error.message || '登录失败，请检查用户名和密码')
+      ElMessage.error(error.response?.data?.message || '登录失败，请检查用户名和密码')
     } finally {
       loading.value = false
     }
